@@ -20,6 +20,12 @@
 
 	<dependencies>
 	<!-- 내가 추가한 라이브러리 -->
+	<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
+		</dependency>
 	<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jasper -->
 		<dependency>
 		    <groupId>org.apache.tomcat</groupId>
