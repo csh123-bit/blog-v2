@@ -9,25 +9,25 @@ public class PostController {
 	@GetMapping({"","/","post"})
 
 	public String posts() {
-		System.out.println("들어옴");
+
 		return"/post/list";
 		
 	}
 	@GetMapping("/post/{id}")
 	public String post() {
-		System.out.println("들어옴");
+
 		return "/post/detail";
 	}
 	
 	@GetMapping("/post/write")
 	public String write() {
-		System.out.println("들어옴");
+
 		return "/post/write";
 	}
 	
 	@GetMapping("/post/update/{id}")
 	public String update() {
-		System.out.println("들어옴");
+
 		return "/post/update";
 	}
 

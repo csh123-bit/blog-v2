@@ -1,4 +1,4 @@
-package com.cos.blog.model;
+package com.cos.blog.model.post;
 
 import java.sql.Timestamp;
 
@@ -9,12 +9,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Post {
 	private int id;
-	private String username;
-	private String password;
-	private String email;
-	private String profile;
+	private String title;
+	private String content;
+	private int userId;
 	private Timestamp createDate;
-
+	
 }

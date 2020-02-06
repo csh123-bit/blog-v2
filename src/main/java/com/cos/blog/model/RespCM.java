@@ -1,7 +1,5 @@
 package com.cos.blog.model;
 
-import java.sql.Timestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,11 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post {
-	private int id;
-	private String title;
-	private String content;
-	private int userId;
-	private Timestamp createDate;
+public class RespCM {
+	private int statusCode;
+	private String msg;
 	
+
 }

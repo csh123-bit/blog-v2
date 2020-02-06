@@ -28,7 +28,7 @@ create database spring;
 use spring;
 CREATE TABLE user(
 	id int auto_increment primary key,
-    username varchar(100) not null,
+    username varchar(100) unique not null,
     password varchar(100) not null,
     email varchar(100),
     profile varchar(200),
