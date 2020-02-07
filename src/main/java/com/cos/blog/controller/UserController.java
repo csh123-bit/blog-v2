@@ -59,16 +59,12 @@ public class UserController {
 	public String profile(@PathVariable int id) {
 		
 		User principal=(User)session.getAttribute("principal");
-		//aop처리
-		if(principal!=null) {
-			if(principal.getId()==id) {
+	
+		if(principal.getId()==id) {
 				return"/user/profile";
 			}else {
-				//권한이 없습니다.여기만 프린트 라이터만들면됨 리턴널하면됨
-				return"/user/login";
-			}
-		}else {
-			//인증 되지않은 사용자입니다.
+				//권한이 없습니다.
+
 			return"/user/login";
 		}
 
