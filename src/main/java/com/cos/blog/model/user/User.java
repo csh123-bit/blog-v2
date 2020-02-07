@@ -36,6 +36,7 @@ public class User {
 		return username;
 	}
 	public void setUsername(String username) {
+		System.out.println("유저네임세터 호출");
 		this.username = username;
 	}
 	public String getPassword() {
