@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.cos.blog.model.user.User;
 
+//시큐리티 구현완료
+
 @Controller
 public class PostController {
 	
@@ -36,17 +38,19 @@ public class PostController {
 	
 	// 인증 체크, 동일인 체크
 	@GetMapping("/post/update/{id}")
-	public String update(@PathVariable int id) {
+	public String update(@PathVariable int userid) {
 		
 		User principal=(User)session.getAttribute("principal");
 		
-		if(principal.getId()==id) {
-			return"post/update/";
-		}else {
+		if(principal.getId()!=userid) {
 			return"user/login/";
+		}
+		
+		
+			return"post/updqte/";
 		}
 		
 	
 	}
 
-}
+
