@@ -1,12 +1,18 @@
 package com.cos.blog.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,8 +21,11 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cos.blog.model.RespCM;
 import com.cos.blog.model.ReturnCode;
@@ -29,6 +38,9 @@ import com.cos.blog.service.UserService;
 
 @Controller
 public class UserController {
+	
+	@Value("${file.path}")
+	private String fileRealPath;//서버에 배포하면 경로 변경해야함(마운트).
 	
 	private static final String TAG="UserController:";
 	
@@ -78,7 +90,7 @@ public class UserController {
 		
 		//서비스 호출
 		User principal=userService.로그인(dto);
-		
+		System.out.println("로그인");
 		if(principal!=null) {
 			session.setAttribute("principal",principal);
 			return new ResponseEntity<RespCM>(new RespCM(200,"ok"),HttpStatus.OK);
@@ -118,6 +130,40 @@ public class UserController {
 		}
 	
 		
+	}
+	// form:form 사용함
+	@PutMapping("user/profile")
+	public @ResponseBody String profile(@RequestParam int id, @RequestParam String password, @RequestParam MultipartFile profile){//이름 똑같이 받으면 배열로 받을수있음
+
+		
+		UUID uuid=UUID.randomUUID();
+		String uuidFilename=uuid+"_"+profile.getOriginalFilename();
+		Path filePath=Paths.get(fileRealPath+uuidFilename);//nio라이브러리
+		try {
+			Files.write(filePath, profile.getBytes());
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		
+		int result=userService.수정완료(id, password, uuidFilename);//유저로 받아서 세션을 덮어씌워야함
+		
+		StringBuffer sb=new StringBuffer();
+		if(result==1) {//유틸리티에 만들것
+			sb.append("<script>");
+			sb.append("alert('수정완료');");
+			sb.append("location.href='/';");
+			sb.append("</script>");
+			return sb.toString();
+		}else {
+			sb.append("<script>");
+			sb.append("alert('수정실패');");
+			sb.append("history.back();");
+			sb.append("</script>");
+			return sb.toString();
+		}
+
+
 	}
 	
 }

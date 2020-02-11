@@ -19,5 +19,12 @@
 	<select id="findByUsernameAndPassword" resultType="com.cos.blog.model.user.User">
 		select id,username,email,profile from user where username=#{username} and password=#{password}
 	</select>
+	<update id="update">
+		update user set password=#{password}, profile=#{profile} where id=#{id}
+	</update>
+	<select id="findById" resultType="com.cos.blog.model.user.User">
+		select id, username, email, profile, createDate from user where id=#{id}
+	</select>
+	
 
 </mapper>
