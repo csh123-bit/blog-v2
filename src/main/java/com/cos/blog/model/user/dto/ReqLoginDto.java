@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 //제이슨 데이터 확인
 //메시지 컨버터(Jackson mapper)는 세터를 호출한다
 @Data
-//@NoArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
 public class ReqLoginDto {
 
@@ -25,9 +25,6 @@ public class ReqLoginDto {
 	@NotBlank(message="패스워드를 입력하세요.")
 	private String password;
 	
-	public ReqLoginDto() {
-		System.out.println("logindto");
-	}
 	
 
 	}

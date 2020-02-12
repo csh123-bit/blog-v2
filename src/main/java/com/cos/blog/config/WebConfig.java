@@ -26,6 +26,7 @@ public class WebConfig implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		//원래 있는 함수 오버라이드
+		System.out.println("인터셉터");
 		registry.addInterceptor(new SessionIntercepter())
 			.addPathPatterns("/user/profile/**")
 			.addPathPatterns("/post/write/**")

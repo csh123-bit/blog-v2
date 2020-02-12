@@ -21,6 +21,7 @@ public class SessionIntercepter extends HandlerInterceptorAdapter{
 			return false;
 		}
 		System.out.println("인증 되었습니다.");
+
 		return true;
 	}
 	

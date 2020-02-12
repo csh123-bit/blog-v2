@@ -1,5 +1,7 @@
 package com.cos.blog.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,9 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private HttpSession session;
 	
 	@Transactional
 	
@@ -40,6 +45,20 @@ public class UserService {
 	}
 	public User 로그인(ReqLoginDto dto) {
 		return userRepository.findByUsernameAndPassword(dto);
+	}
+	public int 수정완료(int id, String password, String profile) {
+		
+		int result=userRepository.update(id, password, profile);
+		
+		if(result==1) {//수정 성공
+			User user=userRepository.findById(id);
+			session.setAttribute("principal", user);
+			
+			return 1;
+		}else {//수정 실패
+			return -1;
+		}
+		
 	}
 
 }
