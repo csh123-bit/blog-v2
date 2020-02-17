@@ -21,7 +21,7 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 
-	@PostMapping("/commnet/write")
+	@PostMapping("/comment/write")
 	public ResponseEntity<?> write(@RequestBody ReqDetailDto dto) {
 		System.out.println("댓글쓰기");
 		RespDetailDto comment = commentService.댓글쓰기(dto);
@@ -37,7 +37,7 @@ public class CommentController {
 
 	}
 
-	@DeleteMapping("/commnet/delete/{id}")
+	@DeleteMapping("/comment/delete/{id}")
 	public ResponseEntity<?> write(@PathVariable int id) {
 		System.out.println("댓글삭제");
 		int result = commentService.댓글삭제(id);

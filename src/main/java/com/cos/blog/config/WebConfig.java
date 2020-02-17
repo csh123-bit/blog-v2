@@ -20,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer{
 		WebMvcConfigurer.super.addResourceHandlers(registry);
 		
 		//파일 경로 인식하게 하기
-		registry.addResourceHandler("/media/**").addResourceLocations("file://"+fileRealPath).setCachePeriod(3600).resourceChain(true).addResolver(new PathResourceResolver());
+		registry.addResourceHandler("/media/**").addResourceLocations("file:///"+fileRealPath).setCachePeriod(3600).resourceChain(true).addResolver(new PathResourceResolver());
 	}
 	
 	@Override
